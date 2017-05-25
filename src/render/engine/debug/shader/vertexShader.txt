@@ -1,0 +1,14 @@
+#version 140
+
+in vec2 position;
+
+out vec3 colour;
+
+uniform mat4 transformationMatrix;
+
+void main(void){
+
+    gl_Position = transformationMatrix * vec4(position, 0.0, 1.0);
+    colour = vec3(1.0,0.0,0.0);
+
+}

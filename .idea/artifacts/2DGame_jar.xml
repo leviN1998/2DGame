@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="2DGame:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/2DGame_jar</output-path>
+    <root id="archive" name="2DGame.jar">
+      <element id="module-output" name="2DGame" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lwjgl_util.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/slick/lib/jinput.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/slick/lib/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/slick/lib/lwjgl_util.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/slick/lib/slick.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
