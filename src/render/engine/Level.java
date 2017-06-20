@@ -1,9 +1,11 @@
 package render.engine;
 
+import de.levin.lib.engine.Loader;
+import de.levin.lib.engine.entity.BasicTextureObject;
+import de.levin.lib.engine.graphics.rendering.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import render.engine.models.TexturedModel;
-import tools.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +15,8 @@ import java.util.List;
  */
 public class Level {
 
-    private TexturedModel hintergrund;
-    private TexturedModel hintergrund2;
+    private BasicTextureObject hintergrund1;
+    private BasicTextureObject hintergrund2;
     private float speed;
     List<TexturedModel> toRender;
 
@@ -22,10 +24,12 @@ public class Level {
     private int counter;
 
     public Level(Loader loader){
-        speed = 0.005f;
+        speed = 0.05f;
         toRender = new ArrayList<>();
-        hintergrund = new TexturedModel(loader.loadTexture("Collegeblock"), new Vector2f(0,-0.4f), new Vector2f(1f,1.4f));
-        hintergrund2 = new TexturedModel(hintergrund.getTexture(), new Vector2f(hintergrund.getPosition().x+2, hintergrund.getPosition().y), new Vector2f(1f,1.4f));
+        hintergrund1 = new BasicTextureObject(new Vector2f(0,0), new Vector2f(20,20), "res/package2/collegeblock.png", loader);
+        Vector2f pos = new Vector2f(hintergrund1.getPosition().x + hintergrund1.getWidth() - 1.2f, hintergrund1.getPosition().y);
+        hintergrund2 = new BasicTextureObject(pos, new Vector2f(20,20), "res/package2/collegeblock.png", loader);
+
         running = true;
     }
 
@@ -55,21 +59,27 @@ public class Level {
 
     public void updateHintergrund(){
         if(running) {
-            hintergrund.setPosition(new Vector2f(hintergrund.getPosition().x - speed, hintergrund.getPosition().y));
-            hintergrund2.setPosition(new Vector2f(hintergrund2.getPosition().x - speed, hintergrund2.getPosition().y));
+            hintergrund1.move(-speed, 0);
+            hintergrund2.move(-speed, 0);
 
-            if (hintergrund.getPosition().x <= -2) {
-                float delta = (-2f) - hintergrund.getPosition().x;
-                hintergrund.setPosition(new Vector2f(2-delta, -0.4f));
+
+
+            if (hintergrund1.getPosition().x <= -19) {
+                //float delta = (-2f) - hintergrund2.getPosition().x;
+                Vector2f pos = new Vector2f(hintergrund2.getPosition().x + hintergrund2.getWidth() - 1.2f, hintergrund2.getPosition().y);
+                hintergrund1.setPosition(pos);
             }
-            if (hintergrund2.getPosition().x <= -2) {
-                float delta = (-2f) - hintergrund2.getPosition().x;
-                hintergrund2.setPosition(new Vector2f(2-delta, -0.4f));
+            if(hintergrund2.getPosition().x <= -19) {
+                Vector2f pos = new Vector2f(hintergrund1.getPosition().x + hintergrund1.getWidth() - 1.2f, hintergrund1.getPosition().y);
+                hintergrund2.setPosition(pos);
             }
         }
 
-        toRender.add(hintergrund);
-        toRender.add(hintergrund2);
+    }
+
+    public void process(de.levin.lib.engine.graphics.rendering.Renderer renderer){
+        renderer.process(hintergrund1);
+        renderer.process(hintergrund2);
     }
 
 

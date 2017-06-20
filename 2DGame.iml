@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="lwjgl" level="project" />
     <orderEntry type="library" exported="" name="jinput" level="application" />
+    <orderEntry type="library" name="2Dlib" level="project" />
   </component>
 </module>

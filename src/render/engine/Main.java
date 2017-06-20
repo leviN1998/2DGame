@@ -1,14 +1,18 @@
 package render.engine;
 
+
+import de.levin.lib.engine.Loader;
+import de.levin.lib.engine.graphics.rendering.*;
+import de.levin.lib.engine.graphics.rendering.Renderer;
+import de.levin.lib.engine.graphics.shaders.Shader;
+import de.levin.lib.engine.toolbox.DisplayManager;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
+import render.engine.debug.game.BackGround;
 import render.engine.models.TexturedModel;
-import tools.DisplayManager;
-import tools.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by levin on 17.03.2017.
@@ -19,11 +23,11 @@ public class Main implements Runnable{
 
     private DisplayManager displayManager;
     private Loader loader;
-    private Renderer renderer;
-    private Level level;
+    private de.levin.lib.engine.graphics.rendering.Renderer renderer;
+    private Shader shader;
+    private BackGround bg;
     private Player player;
     private List<TexturedModel> linien;
-    private List<TexturedModel> toRender;
 
 
     @Override
@@ -50,11 +54,11 @@ public class Main implements Runnable{
     public void init(){
         displayManager = new DisplayManager();
         loader = new Loader();
-        renderer = new Renderer(loader);
-        level = new Level(loader);
-        player = new Player(loader);
+        shader = new Shader();
+        renderer = new Renderer(shader);
+        bg = new BackGround(loader, "res/package2/collegeblock.png", 4, new Vector2f(20,20), 0.8f);
+        //player = new Player(loader);
         linien = new ArrayList<>();
-        toRender = new ArrayList<>();
 
         initModels();
     }
@@ -65,27 +69,26 @@ public class Main implements Runnable{
     }
 
     public void render(){
+        //process
+        bg.process(renderer);
 
-        renderer.render(toRender);
+        renderer.prepare();
+
+        renderer.render();
     }
 
     public void update(){
-        toRender = new ArrayList<>();
 
-        level.update();
-        player.update();
+        bg.update(3f);
+        //player.update();
 
-        for(TexturedModel model : level.getToRender()){
-            toRender.add(model);
-        }
 
-        toRender.add(player.getRenderImage());
     }
 
     public void initModels(){  //Vorläufig
-        TexturedModel line   = new TexturedModel(loader.loadTexture("linie"  ), new Vector2f(0,-0.27f), new Vector2f(1,1));  //Für debug Zwecke
+        //TexturedModel line   = new TexturedModel(loader.loadTexture("linie"  ), new Vector2f(0,-0.27f), new Vector2f(1,1));  //Für debug Zwecke
 
-        linien.add(line);
+        //linien.add(line);
     }
 
 

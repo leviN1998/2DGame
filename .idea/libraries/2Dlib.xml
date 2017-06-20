@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="2Dlib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../2Dlib/out/artifacts/2Dlib_jar/2Dlib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

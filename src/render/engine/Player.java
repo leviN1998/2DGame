@@ -28,6 +28,7 @@ public class Player {
         TexturedModel model5 = new TexturedModel(loader.loadTexture("Gewebe5"), new Vector2f(0,0), new Vector2f(0.1666667f,0.333333f));
         TexturedModel model6 = new TexturedModel(loader.loadTexture("Gewebe6"), new Vector2f(0,0), new Vector2f(0.1666667f,0.333333f));
 
+
         characters.add(model1);
         characters.add(model2);
         characters.add(model3);
