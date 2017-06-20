@@ -9,6 +9,7 @@ import de.levin.lib.engine.toolbox.DisplayManager;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import render.engine.debug.game.BackGround;
+import render.engine.debug.game.NewPlayer;
 import render.engine.models.TexturedModel;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Main implements Runnable{
     private de.levin.lib.engine.graphics.rendering.Renderer renderer;
     private Shader shader;
     private BackGround bg;
-    private Player player;
+    private NewPlayer newPlayer;
     private List<TexturedModel> linien;
 
 
@@ -56,8 +57,8 @@ public class Main implements Runnable{
         loader = new Loader();
         shader = new Shader();
         renderer = new Renderer(shader);
-        bg = new BackGround(loader, "res/package2/collegeblock.png", 4, new Vector2f(20,20), 0.8f);
-        //player = new Player(loader);
+        bg = new BackGround(loader, "res/package2/collegeblockteil.jpg", 8, new Vector2f(11.3f,11.3f), 0f);
+        newPlayer = new NewPlayer(loader, new Vector2f(-6, -2.71f));
         linien = new ArrayList<>();
 
         initModels();
@@ -71,6 +72,7 @@ public class Main implements Runnable{
     public void render(){
         //process
         bg.process(renderer);
+        newPlayer.process(renderer);
 
         renderer.prepare();
 
@@ -80,7 +82,7 @@ public class Main implements Runnable{
     public void update(){
 
         bg.update(3f);
-        //player.update();
+        newPlayer.update();
 
 
     }

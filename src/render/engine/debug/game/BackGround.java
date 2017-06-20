@@ -63,7 +63,7 @@ public class BackGround {
 
     public void moveObject(BasicTextureObject o, int index){
         o.move(-speed,0);
-        if(o.getPosition().x < -7-o.getWidth()){
+        if(o.getPosition().x < -10-(o.getWidth()/2)){
             Vector2f last = getLastObject().getPosition();
             float width = getLastObject().getWidth();
             o.setPosition(new Vector2f(last.x + width - offset, last.y));
